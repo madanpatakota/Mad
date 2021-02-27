@@ -1,61 +1,53 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { CustomersService } from '../customers.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { CanDeactivateCustomersComponent } from '../can-de-activate.guard';
-
+import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { ProductsService } from '../products.service';
+import { LogsService } from '../logs.service';
+import { OrdersService } from '../orders.service';
+import { Subject, BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css']
+  styleUrls: ['./customers.component.css'],
+  providers: [ProductsService, LogsService, OrdersService]
 })
-export class CustomersComponent implements OnInit , CanDeactivateCustomersComponent  {
+export class CustomersComponent implements OnInit , AfterViewInit {
 
-  CurrentURL = '';
-  constructor(private customerService: CustomersService,
-    private activateRouter: ActivatedRoute, private router: Router) {
+  @Input() NewCustomer: {} = {};
+  //ProuctsServiceInstance = null;
+  ProductsObservable = new Subject();
+  constructor(private ProuctsServiceInstance: ProductsService,
+    private _logservice: LogsService, private OrderService: OrdersService) {
+    //this.ProuctsServiceInstance = new ProductsService();
+    console.log("reference form csutoemrs ", this._logservice);
+    // this.ProductsObservable.subscribe((param) => {
+    //   this.Products.push(param);
+    // });
+    // this.OrderService.ProductsObservable.subscribe((param) => {
+    // console.log("fired");
+    // });
+    // this.ProductsObservable = this.OrderService.ProductsObservable;
 
-    this.CurrentURL = this.router.url;
-    this.activateRouter.params.subscribe((param: any) => {
-      console.log("from parent");
-      console.log(param);
-      // this.paramCustomerID = param;
+    //this.Products.push(this.Customer);
+  }
+
+  ngAfterViewInit(){
+    this.Products.push(this.NewCustomer);
+  }
+
+  CustomerName = '';
+  Products = [];
+
+  ngOnInit(): void {
+    this.Products = this.ProuctsServiceInstance.ProductsData;
+
+    this.ProductsObservable.subscribe((param) => {
+      this.Products.push(param);
     });
   }
 
-  CustomersList = [];
-  componentName = 'customer';
-
-  //@ViewChild('customerteamplate') customer : TemplateRef<any>;
-  ngOnInit(): void {
-    this.CustomersList = this.customerService.getCustomers();
-  }
-
-
-  evtCustomer(CustomerID) {
-    //this.router.navigate(["Customer"], { queryParams: { 'CustomerID': CustomerID }, 
-    //relativeTo: this.activateRouter });
-
-    console.log("madan");
-    this.router.navigate(["Customer"], { fragment: CustomerID.toString(), relativeTo: this.activateRouter });
-
-  }
-
-
-  txtComments = null;
-  
-  canDeactivate():  boolean {
-    if (this.txtComments) {
-      return window.confirm("Do you want to discard changes?");
-    }
-    return true;
-  }
-
-  evtSave() {
-    //this.txtCommentpageLoad = this.txtComment;
-    //.......
-    alert("Data Saved Successfully...");
+  evtGetData(CustomerName) {
+    this.Products = this.ProuctsServiceInstance.GetProductsByCustomerName(CustomerName);
+    this._logservice.Logger("from Cusomers '" + CustomerName + "'");
   }
 
 }

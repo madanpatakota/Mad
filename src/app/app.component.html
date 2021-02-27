@@ -1,6 +1,2 @@
-<div class="text-primary">
-    {{updates}}
-</div>
-
-
-<router-outlet></router-outlet>
+<app-customers [NewCustomer] = "NewCustomer" ></app-customers>
+<app-orders (evtAddCustomer) = "NewCustomer($event)" ></app-orders>

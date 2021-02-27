@@ -1,22 +1,35 @@
-import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { CustomersService } from './customers.service';
+import { Component, OnInit } from '@angular/core';
+import { LogsService } from './logs.service';
+import { OrdersService } from './orders.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [LogsService, OrdersService]
 })
 export class AppComponent implements OnInit {
-  title = 'AngualrRoutes';
 
-  constructor(private router: Router, private activaterouter: ActivatedRoute) { }
 
-  updates = "";
+  Customer = {};
+  NewCustomer(data) {
+    Object.assign(this.Customer,data);
+  }
+
+  constructor(private LoggerService: LogsService, private orderService: OrdersService) {
+    //console.log("referecne from appcomponent " , this.LoggerService);
+    // this.orderService.ProductsObservable.next("data");
+    // this.orderService.ProductsObservable.subscribe((param) => {
+    //   console.log("appcomponent fired");
+    // });
+
+  }
+
   ngOnInit() {
-    this.activaterouter.data.subscribe(param => {
-      this.updates = param.comments;
+    this.orderService.ProductsObservable.subscribe((param) => {
+      console.log("appcomponent fired");
     });
   }
+  //title = 'AngularDemos';
 
 }
