@@ -1,53 +1,47 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { ProductsService } from '../products.service';
-import { LogsService } from '../logs.service';
-import { OrdersService } from '../orders.service';
-import { Subject, BehaviorSubject } from 'rxjs';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CustomerService } from '../customer.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CreateCustomerComponent } from './create-customer/create-customer.component';
+
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
   styleUrls: ['./customers.component.css'],
-  providers: [ProductsService, LogsService, OrdersService]
 })
-export class CustomersComponent implements OnInit , AfterViewInit {
+export class CustomersComponent implements OnInit, OnDestroy {
 
-  @Input() NewCustomer: {} = {};
-  //ProuctsServiceInstance = null;
-  ProductsObservable = new Subject();
-  constructor(private ProuctsServiceInstance: ProductsService,
-    private _logservice: LogsService, private OrderService: OrdersService) {
-    //this.ProuctsServiceInstance = new ProductsService();
-    console.log("reference form csutoemrs ", this._logservice);
-    // this.ProductsObservable.subscribe((param) => {
-    //   this.Products.push(param);
-    // });
-    // this.OrderService.ProductsObservable.subscribe((param) => {
-    // console.log("fired");
-    // });
-    // this.ProductsObservable = this.OrderService.ProductsObservable;
+  constructor(private http: HttpClient, private customerService: CustomerService,
+    private modalService: NgbModal) { }
 
-    //this.Products.push(this.Customer);
-  }
+  //CustomersList = [];
 
-  ngAfterViewInit(){
-    this.Products.push(this.NewCustomer);
-  }
-
-  CustomerName = '';
-  Products = [];
-
+  //subscription: Subscription;
   ngOnInit(): void {
-    this.Products = this.ProuctsServiceInstance.ProductsData;
+    // this.subscription = this.customerService.getCustomers().
+    //   subscribe((Response: any) => {
+    //     //console.log(Response.data);
+    //     this.CustomersList = Response.data;
+    //   });
+  }
 
-    this.ProductsObservable.subscribe((param) => {
-      this.Products.push(param);
+  ngOnDestroy() {
+    //this.subscription.unsubscribe();
+  }
+
+  openComponent() {
+    this.modalService.open(CreateCustomerComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      backdropClass: 'light-blue-backdrop',
+      windowClass: 'dark-modal',
+      size: 'lg' //sm , xl,
+      //centered:true,
+      //scrollable : true
     });
   }
 
-  evtGetData(CustomerName) {
-    this.Products = this.ProuctsServiceInstance.GetProductsByCustomerName(CustomerName);
-    this._logservice.Logger("from Cusomers '" + CustomerName + "'");
-  }
+
+
 
 }

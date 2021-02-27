@@ -1,0 +1,56 @@
+<table class="table table-bordered">
+    <thead>
+        <th>Update</th>
+        <th>Delete</th>
+        <th>ContactTitle</th>
+        <th>CustomerID</th>
+        <th>CompanyName</th>
+        <th>ContactName</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Region</th>
+        <th>Country</th>
+        <th>Phone</th>
+        <th>Fax</th>
+        <th>PostalCode</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let record of CustomersList ; let $index=index">
+            <td>
+                <button (click)="evtUpdate(record,'Update')" style="padding:1px" type="button"
+                    class="btn btn-primary btn-xs">
+                    <i class="fas fa-edit"></i></button> &nbsp;</td>
+            <td>
+                <button (click)="evtDelete(record.CustomerID,$index,confirmationTemplate)"  style="padding:1px"
+                    type="button" class="btn btn-danger">
+                    <i class="fas fa-trash"></i></button></td>
+            <td>{{record.ContactTitle}}</td>
+            <td>{{record.CustomerID}}</td>
+            <td>{{record.CompanyName}}</td>
+            <td>{{record.ContactName}}</td>
+            <td>{{record.Address}}</td>
+            <td>{{record.City}}</td>
+            <td>{{record.Region}}</td>
+            <td>{{record.Country}}</td>
+            <td>{{record.Phone}}</td>
+            <td>{{record.Fax}}</td>
+            <td>{{record.PostalCode}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ng-template #confirmationTemplate let-modal>
+    <div class="row">
+        <div class="modal-body text-center">
+            <div class="form-group">
+                <p>Do you want to delete the record?</p>
+                <button type="button" class="btn btn-primary" 
+                (click)="confirm();modal.dismiss()">Confirm</button>&nbsp;
+                <button type="button" class="btn btn-warning" 
+                (click)="modal.dismiss()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
