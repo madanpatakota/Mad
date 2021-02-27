@@ -1,0 +1,75 @@
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Location
+                </th>
+                <th>
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let customer of CustomersList;let Index = index">
+                <td> {{customer.Name}}</td>
+                <td>{{customer.Place}}</td>
+                <td>
+                    <!-- <a style="cursor: pointer;" routerLink="/Customer">..More</a>
+                    localhost:custoemrs/customer
+                    localhost:customer
+                    -->
+                    <!-- <a style="cursor: pointer;" [routerLink]="['Customer',customer.ID]">..More</a> -->
+                    <!-- <a style="cursor: pointer;" [routerLink]="['Customer']" [queryParams]="{'CustomerID':customer.ID}">..More</a> -->
+                    <a style="cursor: pointer;" (click)='evtCustomer(customer.ID)'>..More</a>
+                    <!-- <a style="cursor: pointer;" [routerLink]="['Customer']"
+                         fragment="{{customer.ID}}">..More</a> -->
+
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+    <hr>
+    <div class="container">
+        <textarea rows="2" class="form-control" [(ngModel)]="txtComments" placeholder="Comments...."></textarea>
+        <br>
+        <input type="button" (click)="evtSave()" class="btn btn-primary" value="Save">
+    </div>
+
+</div>
+<router-outlet></router-outlet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <Task to me></Task> -->
+<!-- <ng-container *ngTemplateOutlet="customerteamplate">
+</ng-container>
+<ng-template #customerteamplate>
+    <router-outlet></router-outlet>
+</ng-template>
+<ng-template #Orders>
+    <router-outlet></router-outlet>
+</ng-template>
+<ng-template #OrdersDetails>
+    <router-outlet></router-outlet>
+</ng-template> -->

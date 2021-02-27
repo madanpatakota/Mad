@@ -1,58 +1,6 @@
-<div class="row" style="margin-top:5em">
-    <div class="container col-md-2">
-        <div class="form">
-            <div>
-                <!-- $event.target gives the current element. -->
-                <!-- Here ngModel depends of the [value] -->
-                <!-- [value] always expects string o/p : [object object]
-                [ngValue] always expects object -->
-                <!-- [ngValue] which captures the object -->
-
-                <!-- Q) How to pass the object from select ? 
-                by default you can't pass the value.
-                 and capture the value in .ts file along with scope -->
-
-                <!-- <select [(ngModel)]="routeObj" class="form-control" #routerSelect (change)="evtChange(routeObj)">
-                    <option value="0">--Select--</option>
-                    <option *ngFor="let item of routes" [value]="item.id" [ngValue]="item">{{item.name}}</option>
-                </select> -->
-                <!-- routeObj name  {{routeObj.name}} -->
-
-                <!-- <hr> -->
-                <form>
-                    <div [formGroup]="selectGroup">
-                        <select formControlName="DefaultValue" class="form-control" #routerSelect
-                            (change)="evtChange(routeObj)">
-                            <option value="0">--Select--</option>
-                            <option *ngFor="let item of routes" [value]="item.id">{{item.name}}</option>
-                        </select>
-                    </div>
-                </form>
-
-
-            </div>
-        </div>
-    </div>
-    <div class="col-md-1"></div>
-    <div class="col-md-7">
-        <router-outlet></router-outlet>
-    </div>
+<div class="text-primary">
+    {{updates}}
 </div>
 
 
-<!-- <app-template-approach></app-template-approach> -->
-
-<!-- <app-reactive-approach></app-reactive-approach> -->
-
-<!-- <app-reacative-approach-two></app-reacative-approach-two> -->
-
-<!-- <app-valid-first></app-valid-first> -->
-
-<hr>
-<!-- <h3>
-    Phone Number Validaion By Pattern
-</h3> -->
-
-<!-- <app-valid-second></app-valid-second> -->
-
-<!-- <app-template-custom-valid></app-template-custom-valid> -->
+<router-outlet></router-outlet>
