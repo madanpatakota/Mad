@@ -1,0 +1,24 @@
+<div class="container">
+    Product has Created.... {{clicks}}
+    <form [formGroup]="formGP">
+        <div class="form-group">
+            <input type="checkbox" formControlName="ProductName" name="Name" [checked]="modName"
+                class="col-md-1">IsProduct
+        </div>
+
+        <ng-container #Loccontainer>
+
+        </ng-container>
+
+        <ng-template #Loctemplate>
+            <div class="form-group">
+                <input type="text" name="LocationName" class="form-control" formControlName="LocationName"
+                    placeholder="Location">
+            </div>
+        </ng-template>
+    </form>
+    <ng-content>
+
+    </ng-content>
+
+</div>

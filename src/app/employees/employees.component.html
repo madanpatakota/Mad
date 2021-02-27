@@ -1,0 +1,40 @@
+<!-- <div class="container bg-success" style="margin-top: 30px;">
+    <form [formGroup]="EmployeeForm">
+        <div class="form-group">
+            <input type="text" class="form-control col-md-5" placeholder="Enter Location" formControlName="Location">
+        </div>
+    </form>
+    <ng-content>
+
+    </ng-content>
+</div> -->
+<div class="container" style="margin-top:40px">
+    <input value="Generate Component" (click)="evtEmployeeGenerate()" class="btn btn-primary" type="button">
+</div>
+<div *ngFor="let employeeComp of employees ; let employeeIndex = index">
+    <p class="text-info"> Component Instance is -- <b> {{employeeIndex}} </b></p>
+    <app-employee [Employee]="employeeComp">
+        <!-- <ng-container #container style="margin-bottom: 20px;"></ng-container> -->
+        <!-- <ng-template #formTemplate> -->
+        <!-- <ng-template > -->
+        <ng-template #content>
+            <form name="employeeComp.NameGP" [formGroup]="employeeComp.NameGP" style="margin-top: 30px;"
+                class="container bg-warning">
+                <div formArrayName="ENames">
+                    <div class="form-group"
+                        *ngFor="let item of employeeComp.NameGP.get('ENames')['controls'];let EIndex = index">
+                        <div formGroupName="{{EIndex}}" class="col-sm-12 row">
+                            <input type="text" class="form-control col-sm-5" name="EName" formControlName="EName"
+                                placeholder="EnterName">
+                        </div>
+                    </div>
+                    <input type="button" class="btn btn-primary" (click)="evtClick(employeeIndex)"
+                        value="Generate Content">
+                </div>
+            </form>
+        </ng-template>
+
+        <!-- </ng-template> -->
+        <!-- </ng-template> -->
+    </app-employee>
+</div>

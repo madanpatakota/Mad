@@ -1,0 +1,44 @@
+<!-- <ng-container #container style="margin-bottom: 20px;"></ng-container>
+
+<ng-template #formTemplate>
+    <form [formGroup]="NameGP">
+        <div formArrayName="ENames">
+            <div class="form-group" *ngFor="let item of NameGP.get('ENames')['controls'];let EIndex = index">
+                <div formGroupName="{{EIndex}}" class="col-sm-12 row">
+                    <input type="text" class="form-control col-md-5" name="EName" formControlName="EName"
+                        placeholder="EnterName">
+                </div>
+            </div>
+        </div>
+        <input type="button" class="btn btn-primary" (click)="evtClick()" value="Click">
+    </form>
+</ng-template> -->
+
+<div class="container bg-success" style="margin-top: 30px;">
+    <form [formGroup]="EmployeeForm" class="bg-secondary">
+        <div class="form-group">
+            <input type="text" class="form-control col-md-5" placeholder="Enter Location" formControlName="Location">
+        </div>
+        <div formArrayName="Orders">
+            <div *ngFor="let orderX of EmployeeForm.get('Orders')['controls'];let index = index">
+                <div class="form-group" formArrayName="{{index}}">
+                    <input type="text" class="form-control col-md-5" placeholder="Enter Order" formControlName="Order">
+                </div>
+            </div>
+        </div>
+        <input type="button" class="btn btn-primary" value="Generate View Content" (click)="evtGenerateViewContent()">
+    </form>
+
+    <!-- <ng-container>
+        <ng-content>
+        </ng-content>
+    </ng-container> -->
+
+    <!-- <ng-container [ngTemplateOutlet]="content">
+    </ng-container> -->
+    <!-- <ng-content></ng-content> -->
+    <div #VContent>
+    </div>
+
+
+</div>
