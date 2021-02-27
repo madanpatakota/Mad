@@ -1,0 +1,48 @@
+<div class="container" style="margin-top:10px">
+    <div>
+        <h4>
+            User Form (Reactive Approach)
+        </h4>
+    </div>
+
+    <!-- //[formGroup] indicates Main -->
+    <form (ngSubmit)="evtSubmit()" [formGroup]="userForm">
+
+        <!-- //formGroupName indicates child -->
+        <div formGroupName="nUserFormGroup">
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" formControlName="fUserName" />
+                    <small *ngIf="userForm.get('nUserFormGroup').get('fUserName').invalid 
+                && userForm.get('nUserFormGroup').get('fUserName').touched" class="form-text text-muted">Please Enter
+                        User Name
+                    </small>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" formControlName="fEmail" />
+                    <small *ngIf="userForm.get('nUserFormGroup').get('fEmail').invalid
+                && userForm.get('nUserFormGroup').get('fEmail').touched" class="form-text text-muted">Please Enter
+                        User Mail
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">City</label>
+            <div class="col-sm-10">
+                <select formControlName="fCity" class="form-control">
+                    <option [value]="item.Id" *ngFor="let item of CityList"> {{item.Name}} </option>
+                </select>
+                <small *ngIf="userForm.get('fCity').invalid && userForm.get('fCity').touched"
+                    class="form-text text-muted">Please Enter User Name
+                </small>
+            </div>
+        </div>
+        <button class="btn btn-primary">Submit</button>
+    </form>
+</div>

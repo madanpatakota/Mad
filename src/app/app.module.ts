@@ -1,45 +1,57 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TestFormComponent } from './test-form/test-form.component';
+import { TemplateApproachComponent } from './template-approach/template-approach.component';
+import { ReactiveApproachComponent } from './reactive-approach/reactive-approach.component';
+import { ReacativeApproachTwoComponent } from './reacative-approach-two/reacative-approach-two.component';
+import { ValidFirstComponent } from './Validations/valid-first/valid-first.component';
+import { ValidSecondComponent } from './Validations/valid-second/valid-second.component';
+import { PhoneNumberValidatorDirective } from './phone-number-validator.directive';
+import { TemplateCustomValidComponent } from './Validations/template-custom-valid/template-custom-valid.component';
+import { ReactiveCustomValidComponent } from './Validations/reactive-custom-valid/reactive-custom-valid.component';
+import { PasswordCheckerDirective } from './password-checker.directive';
+import { PasswordCheckerTwoDirective } from './password-checker-two.directive';
+import { RouterModule, Routes } from '@angular/router';
 
-import {FormsModule} from '@angular/forms';
-import { ReactiveFormsModule} from '@angular/forms';
-import { CustomValidationComponent } from './custom-validation/custom-validation.component';
-import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
-import { TemplateApproachFormComponent } from './template-approach-form/template-approach-form.component';
-import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
-import { ROUTES, Routes, RouterModule } from '@angular/router';
-import { CanActivateGuardGuard } from './can-activate-guard.guard';
 
-// path : '/' , component : AppComponent , canActivate :[CanActivateGuardGuard]},
-const routers: Routes = [{
-   path : 'Reactive' , component : ReactiveFormComponent },
-   {path:'CustomValidation' , component : CustomValidationComponent},
-   {path:'Dynamic' , component : DynamicTableComponent},
-   {path : '' , component : TemplateApproachFormComponent}
-  ];
+const appRoutes: Routes = [{
+  path: 'ValidFirst', component: ValidFirstComponent
+},
+{ path: 'ValidSecond', component: ValidSecondComponent },
+{ path: 'TemplateApproach', component: TemplateApproachComponent },
+{ path: 'ReactiveApproach', component: ReactiveApproachComponent },
+{ path: 'ReactiveApproach2', component: ReacativeApproachTwoComponent },
+{
+  path: '', redirectTo: 'ValidFirst', pathMatch: 'full'
+}]
 
+
+//import {phoneNumberValidatorOne} from './phone-number-validator';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestFormComponent,
-    CustomValidationComponent,
-    ReactiveFormComponent,
-    TemplateApproachFormComponent,
-    DynamicTableComponent
+    TemplateApproachComponent,
+    ReactiveApproachComponent,
+    ReacativeApproachTwoComponent,
+    ValidFirstComponent,
+    ValidSecondComponent,
+    PhoneNumberValidatorDirective,
+    TemplateCustomValidComponent,
+    ReactiveCustomValidComponent,
+    PasswordCheckerDirective,
+    PasswordCheckerTwoDirective
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(routers)
+    FormsModule, ReactiveFormsModule,
+    RouterModule.forRoot(appRoutes)
   ],
-  providers: [],
+  providers: [
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

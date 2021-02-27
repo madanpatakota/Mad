@@ -1,0 +1,15 @@
+input.ng-touched.ng-pristine.ng-invalid {
+  border: 1px red solid;
+}
+
+input.ng-dirty.ng-touched.ng-invalid {
+  border: 1px red solid;
+}
+
+select.ng-touched.ng-pristine.ng-invalid {
+  border: 1px red solid;
+}
+
+.ShowError {
+  border: 1px red solid;
+}

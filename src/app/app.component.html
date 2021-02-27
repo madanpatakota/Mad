@@ -1,43 +1,58 @@
-<!-- <app-test-form></app-test-form> -->
-<!-- path : '' , component : AppComponent , canActivate :[CanActivateGuardGuard]},{
-  path : '/Reactive' , component : ReactiveFormComponent },
-  {path:'/CustomValidation' , component : CustomValidationComponent},
-  {path:'/Dynamic' , component : DynamicTableComponent} -->
-<ul class="nav nav-tabs justify-content-center" id="TestTabs" role="tablist">
-  <li class="nav-item">
-    <!-- href="#template" -->
-    <a class="nav-link active" id="template-tab" data-toggle="tab" routerLink="/"  role="tab" aria-controls="template"
-      aria-selected="true">Template Driven Approach</a>
-  </li>
-  <li class="nav-item">
-    <!-- href="#Reactive" -->
-    <a class="nav-link" id="Reactive-tab" data-toggle="tab" routerLink="/Reactive" role="tab" aria-controls="Reactive"
-      aria-selected="false">Reactive Approach</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="CustomValidations-tab" data-toggle="tab" href="#CustomValidations" role="tab"
-      aria-controls="CustomValidations" aria-selected="false">CustomValidations</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="DynamicTable-tab" data-toggle="tab" href="#DynamicTable" role="tab" aria-controls="contact"
-      aria-selected="false">Dynamic Control</a>
-  </li>
-</ul>
+<div class="row" style="margin-top:5em">
+    <div class="container col-md-2">
+        <div class="form">
+            <div>
+                <!-- $event.target gives the current element. -->
+                <!-- Here ngModel depends of the [value] -->
+                <!-- [value] always expects string o/p : [object object]
+                [ngValue] always expects object -->
+                <!-- [ngValue] which captures the object -->
+
+                <!-- Q) How to pass the object from select ? 
+                by default you can't pass the value.
+                 and capture the value in .ts file along with scope -->
+
+                <!-- <select [(ngModel)]="routeObj" class="form-control" #routerSelect (change)="evtChange(routeObj)">
+                    <option value="0">--Select--</option>
+                    <option *ngFor="let item of routes" [value]="item.id" [ngValue]="item">{{item.name}}</option>
+                </select> -->
+                <!-- routeObj name  {{routeObj.name}} -->
+
+                <!-- <hr> -->
+                <form>
+                    <div [formGroup]="selectGroup">
+                        <select formControlName="DefaultValue" class="form-control" #routerSelect
+                            (change)="evtChange(routeObj)">
+                            <option value="0">--Select--</option>
+                            <option *ngFor="let item of routes" [value]="item.id">{{item.name}}</option>
+                        </select>
+                    </div>
+                </form>
 
 
-<div class="tab-content " id="TestTabContent" style="margin-top: 20px">
-
-  <div class="tab-pane fade show active" id="template" style="margin-top: 20px" role="tabpanel"
-    aria-labelledby="template-tab">
-    <app-template-approach-form></app-template-approach-form>
-  </div>
-  <div class="tab-pane fade" id="Reactive" role="tabpanel" aria-labelledby="Reactive-tab">
-    <app-reactive-form></app-reactive-form>
-  </div>
-  <div class="tab-pane fade" id="CustomValidations" role="tabpanel" aria-labelledby="CustomValidations-tab">
-    <app-custom-validation></app-custom-validation>
-  </div>
-  <div class="tab-pane fade" id="DynamicTable" role="tabpanel" aria-labelledby="DynamicTable-tab">
-    <!-- <app-dynamic-table></app-dynamic-table> -->
-  </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-7">
+        <router-outlet></router-outlet>
+    </div>
 </div>
+
+
+<!-- <app-template-approach></app-template-approach> -->
+
+<!-- <app-reactive-approach></app-reactive-approach> -->
+
+<!-- <app-reacative-approach-two></app-reacative-approach-two> -->
+
+<!-- <app-valid-first></app-valid-first> -->
+
+<hr>
+<!-- <h3>
+    Phone Number Validaion By Pattern
+</h3> -->
+
+<!-- <app-valid-second></app-valid-second> -->
+
+<!-- <app-template-custom-valid></app-template-custom-valid> -->
