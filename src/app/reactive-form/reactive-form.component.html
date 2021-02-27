@@ -1,0 +1,151 @@
+<div class="container">
+  <form name="R1TestForm" (submit)="evtRTestForm()" #RTestForm="ngForm">
+    <!-- <form name="R1TestForm" (submit)="evtRTestForm(RTestForm)" #RTestForm="ngForm"> -->
+    <!-- [formControlName] = "'RName'" -->
+    <div [formGroup]="RTestFormGroup">
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="TestId">Name</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="TestId" name="Name" placeholder="Test Name"
+            [formControlName]="'RName'" [ngModel]="RModName" />
+          <small id="" *ngIf="RTestFormGroup.get('RName').touched && 
+                 RTestFormGroup.get('RName').invalid" class="form-text text-muted">Please enter Test
+            Name</small>
+          <small id="" class="form-text text-muted">Should not be Allow
+            Special
+            Charcters</small>
+        </div>
+      </div>
+      <!-- *ngIf="TestDetails.controls.get('Description').touched 
+      && TestDetails.controls.get('Description').invalid" -->
+      <div [formGroupName]="'TestDetails'">
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="Description">Description</label>
+          <div class="col-sm-10">
+            <textarea [formControlName]="'Description'" rows="3" maxlength="50" placeholder="Description"
+              class="form-control" id="Description" name="Description" placeholder="Description" required></textarea>
+            <small id="" *ngIf="RTestFormGroup.get('TestDetails.Description').touched&& 
+            RTestFormGroup.get('TestDetails.Description').invalid" class="form-text text-muted">Please
+              enter
+              comments</small>
+            <small id="" class="form-text text-muted">Comment
+              should be more than 50 Charcters</small>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label" for="Relavant">Is it Relavant to Earlier Issue ? </label>
+          <div class="col-sm-10">
+            <div class="form-check-inline radio" *ngFor="let item of Relavants">
+              <input [formControlName]="'Relavant'" class="form-check-input radio" [value]="item.ID" type="radio"
+                id="Relavant{{item.ID}}" name="Relavant" required>
+              <label class="form-check-label" for="Relavant{{item.ID}}">
+                {{item.Name}}
+              </label>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="Developers">Developer</label>
+        <div class="col-sm-10">
+          <select name="Developer" class="form-control" [formControlName]="'Developer'">
+            <!-- <option  placeholder="Please enter Developer" selected>Select Developer</option> -->
+            <option [value]="item.Id" *ngFor="let item of TeamList" id="Developers"> {{item.Name}} </option>
+          </select>
+          <small *ngIf="RTestFormGroup.get('Developer').touched&& 
+          RTestFormGroup.get('Developer').invalid" id="" class="form-text text-muted">Please enter
+            Developer Name</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="Tester">Raised By</label>
+        <!-- [(ngModel)]="modTester" -->
+        <div class="col-sm-10">
+          <select name="Tester" class="form-control" [formControlName]="'Tester'">
+            <!-- <option selected>Select Tester</option> -->
+            <option [value]="item.Id" *ngFor="let item of TeamList" id="Tester"> {{item.Name}} </option>
+          </select>
+          <small *ngIf="RTestFormGroup.get('Tester').touched&& 
+          RTestFormGroup.get('Tester').invalid" id="" class="form-text text-muted">Please enter
+            Tester Name</small>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="Reporter">Reported To</label>
+        <div class="col-sm-10">
+          <select name="Reporter" class="form-control">
+            <option [value]="item.Id" *ngFor="let item of TeamList" id="Reporter"> {{item.Name}} </option>
+          </select>
+          <small id="" *ngIf="RTestFormGroup.get('Reporter').touched && 
+          RTestFormGroup.get('Reporter').invalid" class="form-text text-muted">Please enter
+            Reporter Name</small>
+        </div>
+      </div>
+      <!--  -->
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="Log">Logged Date</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" name="LoggedDate" [formControlName]="'LoggedDate'">
+          <small *ngIf="RTestFormGroup.get('LoggedDate').touched&& 
+          RTestFormGroup.get('LoggedDate').invalid" id="" class="form-text text-muted">Please enter
+            Logged Date</small>
+
+        </div>
+      </div>
+
+
+      <!-- *ngIf="modClosedDate.touched && modClosedDate.invalid" -->
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="Log">Closed Date</label>
+        <div class="col-sm-10">
+          <input type="date" class="form-control" name="ClosedDate" [formControlName]="'ClosedDate'">
+          <small *ngIf="RTestFormGroup.get('ClosedDate').touched&& 
+          RTestFormGroup.get('ClosedDate').invalid" id="" class="form-text text-muted">Please enter
+            Closed Date</small>
+          <small id="" class="form-text text-muted">Closed Date
+            Should
+            be greater than Logged Date</small>
+
+
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label" for="Log">Close with Comments</label>
+        <div class="col-sm-10">
+          <textarea placeholder="Enter Comment how it was resolve" rows="3" minlength="15" class="form-control"
+            [formControlName]="'CComments'" name="CComments"></textarea>
+          <small *ngIf="RTestFormGroup.get('CComments').touched&& 
+          RTestFormGroup.get('CComments').invalid" id="" class="form-text text-muted">Please enter
+            Comments </small>
+          <small id="" class="form-text text-muted">Comments Should
+            be
+            more than 50 Charcters</small>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-3">
+        <input type="button" (click)="evtDefault()" class="form-control btn-primary" value="Default" />
+      </div>
+      <div class="col-3">
+        <button type="submit" class="form-control btn-primary">Submit</button>
+      </div>
+      <div class="col-3">
+        <input type="button" class="form-control btn-primary" (click)="evtReset()" value="Reset">
+      </div>
+
+    </div>
+
+
+
+  </form>
+</div>

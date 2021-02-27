@@ -1,63 +1,45 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule, Component } from '@angular/core';
 
-import { NgModule, ErrorHandler } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { CustomersComponent } from './customers/customers.component';
-import { GetCustomersComponent } from './customers/get-customers/get-customers.component';
-import { NgbModule, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TestFormComponent } from './test-form/test-form.component';
 
+import {FormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
+import { CustomValidationComponent } from './custom-validation/custom-validation.component';
+import { ReactiveFormComponent } from './reactive-form/reactive-form.component';
+import { TemplateApproachFormComponent } from './template-approach-form/template-approach-form.component';
+import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
+import { ROUTES, Routes, RouterModule } from '@angular/router';
+import { CanActivateGuardGuard } from './can-activate-guard.guard';
 
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CreateCustomerComponent } from './customers/create-customer/create-customer.component';
-
-import { ToastrModule } from 'ngx-toastr';
-import { GlobalExceptionHandlerService } from './global-exception-handler.service';
-import { GlobalErrorComponent } from './global-error/global-error.component';
-import { Routes, RouterModule } from '@angular/router';
-import { CustomHttpInterceptor } from './custom-http.interceptor';
-
-const appRoutes: Routes = [
-  {
-    path: '', component: CustomersComponent
-  }, {
-    path: 'error', component: GlobalErrorComponent
-  }, {
-    path: 'customer', redirectTo: '', pathMatch: 'full'
-  }];
+// path : '/' , component : AppComponent , canActivate :[CanActivateGuardGuard]},
+const routers: Routes = [{
+   path : 'Reactive' , component : ReactiveFormComponent },
+   {path:'CustomValidation' , component : CustomValidationComponent},
+   {path:'Dynamic' , component : DynamicTableComponent},
+   {path : '' , component : TemplateApproachFormComponent}
+  ];
 
 
 @NgModule({
-  declarations:
-    [
-      AppComponent,
-      CustomersComponent,
-      GetCustomersComponent,
-      CreateCustomerComponent,
-      GlobalErrorComponent,
-    ],
+  declarations: [
+    AppComponent,
+    TestFormComponent,
+    CustomValidationComponent,
+    ReactiveFormComponent,
+    TemplateApproachFormComponent,
+    DynamicTableComponent
+  ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    NgbModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(routers)
   ],
-  providers: [NgbActiveModal,
-    {
-      provide: ErrorHandler,
-      useClass: GlobalExceptionHandlerService
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: CustomHttpInterceptor,
-      multi: true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

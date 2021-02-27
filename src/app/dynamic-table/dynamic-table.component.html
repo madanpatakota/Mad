@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="form-group">
+        <button class="btn btn-primary" (click)="AddNewRow()">Add</button>
+    </div>
+    <div class="form-group">
+        <table class="table-active table">
+            <tbody>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Description</th>
+            </tbody>
+            <tr *ngFor="let item of Emp ; let index = index">
+                <td>{{item.Name}}</td>
+                <td>{{item.Description}}</td>
+                <td>{{item.Location}}</td>
+            </tr>
+            <div [formGroup]="dynamicRowGroup">
+                <ng-container formArrayName="RowsArray">
+                    <!-- <tr *ngFor="let item of dynamicRowGroup.controls.RowsArray.controls;let index = index"
+                        formGroupName="{{i}}">
+                        <td>
+<input type="text" class="form-control" formControlName="Name">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" formControlName="Description">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" formControlName="Bangolore">
+                        </td>
+
+                    </tr> -->
+                </ng-container>
+            </div>
+        </table>
+    </div>
+</div>

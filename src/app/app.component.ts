@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: []
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit  {
+  title = 'TestApp';
 
 
-  ngOnInit() {
+  ngOnInit(){
+     console.log("app is loaded");
   }
-
 }

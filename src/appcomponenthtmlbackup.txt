@@ -1,0 +1,5 @@
+
+1. automatic select datetime
+2. Automatic select dropdown
+3. Automatic select Checkbox
+4. Automatic Select Radio Button

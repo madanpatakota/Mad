@@ -1,0 +1,17 @@
+input.ng-touched.ng-invalid,
+select.ng-touched.ng-invalid , textarea.ng-touched.ng-invalid{
+  /* border: 0ch; */
+
+  border: 1px solid red;
+}
+
+/* select.ng-touched.ng-invalid
+  {
+     border: 0ch;
+    
+    border:1px solid red;
+} */
+
+span {
+  color: red !important;
+}

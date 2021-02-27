@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GlobalErrorComponent } from './global-error.component';
+import { DynamicTableComponent } from './dynamic-table.component';
 
-describe('GlobalErrorComponent', () => {
-  let component: GlobalErrorComponent;
-  let fixture: ComponentFixture<GlobalErrorComponent>;
+describe('DynamicTableComponent', () => {
+  let component: DynamicTableComponent;
+  let fixture: ComponentFixture<DynamicTableComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GlobalErrorComponent ]
+      declarations: [ DynamicTableComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GlobalErrorComponent);
+    fixture = TestBed.createComponent(DynamicTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

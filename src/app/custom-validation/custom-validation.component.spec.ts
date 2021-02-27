@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GetCustomersComponent } from './get-customers.component';
+import { CustomValidationComponent } from './custom-validation.component';
 
-describe('GetCustomersComponent', () => {
-  let component: GetCustomersComponent;
-  let fixture: ComponentFixture<GetCustomersComponent>;
+describe('CustomValidationComponent', () => {
+  let component: CustomValidationComponent;
+  let fixture: ComponentFixture<CustomValidationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GetCustomersComponent ]
+      declarations: [ CustomValidationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GetCustomersComponent);
+    fixture = TestBed.createComponent(CustomValidationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

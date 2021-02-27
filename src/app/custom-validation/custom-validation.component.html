@@ -1,0 +1,32 @@
+<form #vForm="ngForm">
+    <div class="container" [formGroup]="CustomValidationGroup">
+        <div class="form-group">
+            <input type="text" [formControlName]="'txtName'" name="txtName" class="form-control"
+                placeholder="Enter the value">
+            <span *ngIf="CustomValidationGroup.get('txtName').invalid && CustomValidationGroup.get('txtName').touched ">
+
+                <span *ngIf="CustomValidationGroup.controls['txtName'].errors.maxlength">
+                    Name should be less than 5 charcters
+                </span>
+                <span *ngIf="CustomValidationGroup.controls['txtName'].errors.required">
+                    This Field is required
+                </span>
+                <span *ngIf="CustomValidationGroup.controls['txtName'].errors.email">
+                    This Field should be email pattern
+                </span>
+
+            </span>
+        </div>
+
+        <div [formArrayName]="'CustomFormArray'">
+            <div  class="form-group" 
+            *ngFor="let item of CustomValidationGroup.get('CustomFormArray')['controls'];
+            let i = index">
+                <input type="text" [formControlName]="i" class="form-control" />
+            </div>
+        </div>
+        <button class="btn btn-primary" (click)="AddName(CustomValidationGroup)">
+            Add
+        </button>
+    </div>
+</form>
