@@ -1,22 +1,35 @@
-import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { SchoolService } from './school.service';
-
+import { Component, OnInit } from '@angular/core';
+import { LogsService } from './logs.service';
+import { OrdersService } from './orders.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [LogsService, OrdersService]
 })
-export class AppComponent {
-  title = 'AngularRouting';
+export class AppComponent implements OnInit {
 
-  subscription: Subscription;
-  constructor(private schoolService: SchoolService) {
-    this.subscription = this.schoolService.IsAutheticated.subscribe((param) => {
-      debugger;
-      console.log(param + " IsAuthenticataed subscription App component");
-    });
+
+  Customer = {};
+  NewCustomer(data) {
+    Object.assign(this.Customer,data);
+  }
+
+  constructor(private LoggerService: LogsService, private orderService: OrdersService) {
+    //console.log("referecne from appcomponent " , this.LoggerService);
+    // this.orderService.ProductsObservable.next("data");
+    // this.orderService.ProductsObservable.subscribe((param) => {
+    //   console.log("appcomponent fired");
+    // });
 
   }
+
+  ngOnInit() {
+    this.orderService.ProductsObservable.subscribe((param) => {
+      console.log("appcomponent fired");
+    });
+  }
+  //title = 'AngularDemos';
+
 }
