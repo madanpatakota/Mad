@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnChanges } from '@angular/core';
 import { ProductsService } from '../products.service';
 import { LogsService } from '../logs.service';
 import { OrdersService } from '../orders.service';
@@ -10,11 +10,18 @@ import { Subject, BehaviorSubject } from 'rxjs';
   styleUrls: ['./customers.component.css'],
   providers: [ProductsService, LogsService, OrdersService]
 })
-export class CustomersComponent implements OnInit , AfterViewInit {
+export class CustomersComponent implements OnInit , AfterViewInit,OnChanges {
 
   @Input() NewCustomer: {} = {};
   //ProuctsServiceInstance = null;
   ProductsObservable = new Subject();
+
+
+  ngOnChanges(){
+    console.log(this.NewCustomer);
+  }
+  
+
   constructor(private ProuctsServiceInstance: ProductsService,
     private _logservice: LogsService, private OrderService: OrdersService) {
     //this.ProuctsServiceInstance = new ProductsService();
@@ -32,6 +39,7 @@ export class CustomersComponent implements OnInit , AfterViewInit {
 
   ngAfterViewInit(){
     this.Products.push(this.NewCustomer);
+    console.log("ngAfterViewInit is fired");
   }
 
   CustomerName = '';

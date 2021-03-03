@@ -59,12 +59,12 @@ export class OrdersService {
     this.ProductsData = this.ProductServiceInstace.GetProductsByCustomerName(CustomerName);
 
     const OrdersFilterData = [];
-    this.ProductsData.forEach((element) => {
+    this.ProductsData.forEach((productelement) => {
       const OrdersData: any = this.OrdersData.find((elementOrder) => {
-        return elementOrder.OrderID === element.OrderID;
+        return elementOrder.OrderID === productelement.OrderID;
       });
-      OrdersData.CustomerName = element.CustomerName;
-      OrdersData.ProductName = element.ProductName;
+      OrdersData.CustomerName = productelement.CustomerName;
+      OrdersData.ProductName = productelement.ProductName;
       OrdersFilterData.push(OrdersData);
     });
     this.OrdersEmitter.emit(OrdersFilterData);
@@ -79,9 +79,12 @@ export class OrdersService {
     const newCustomer = {
       CustomerName: "Mallesh", ProductName: "Biscuits", OrderID: "xy008"
     };
+
     this.ProductServiceInstace.ProductsData.push(newCustomer);
     //this.ProductsObservable.next(newCustomer);
+
     evtAddCustomer.emit(newCustomer);
+
     this.OrdersData.push({
       OrderID: "xy008", Quantity: 15, UnitPrice: "500Rs",
       CompanyName: "Specialty Biscuits, Ltd",

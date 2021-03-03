@@ -9,13 +9,22 @@ import { CustomersComponent } from 'src/app/customers/customers.component';
   styleUrls: ['./order-details.component.css'],
   providers: []  // remember this point.
 })
-export class OrderDetailsComponent implements OnInit {
+export class OrderDetailsComponent implements  AfterViewInit {
 
   constructor(private OrderServcieInstanceChild: OrdersService, private Logsservice: LogsService) { }
 
   @Input() OrderCustomerName: string = undefined;
 
-  ngOnInit() {
+  // ngOnInit() {
+  //   this.OrderServcieInstanceChild.OrdersEmitter.subscribe((Orders) => {
+  //     Orders.forEach(element => {
+  //       this.OrderDetails.push(element);
+  //     });
+  //   });
+  // }
+
+
+  ngAfterViewInit() {
     this.OrderServcieInstanceChild.OrdersEmitter.subscribe((Orders) => {
       Orders.forEach(element => {
         this.OrderDetails.push(element);
