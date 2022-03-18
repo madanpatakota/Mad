@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 
 
 
-@Injectable()
+@Injectable({providedIn:'root'})
 //-- Productservice here 
 //Telling to the angular you can inject the any kind of service which can designed by the typescript class
 export class OrdersService {
@@ -51,9 +51,8 @@ export class OrdersService {
 
 
   ProductsData = [];
-
   OrdersEmitter = new EventEmitter<any>();
-
+  OrderObservable = new Subject();
   getOrdersWithPrices(CustomerName) {
     // Iam using Productservice into Order Service.....
     this.ProductsData = this.ProductServiceInstace.GetProductsByCustomerName(CustomerName);
@@ -68,6 +67,7 @@ export class OrdersService {
       OrdersFilterData.push(OrdersData);
     });
     this.OrdersEmitter.emit(OrdersFilterData);
+    this.OrderObservable.next(OrdersFilterData);
     return OrdersFilterData;
   }
 

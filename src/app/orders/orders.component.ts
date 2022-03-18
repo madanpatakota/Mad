@@ -1,3 +1,4 @@
+import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, AfterViewInit, ComponentRef, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { OrdersService } from '../orders.service';
 
@@ -10,7 +11,7 @@ import { OrdersService } from '../orders.service';
   // service is reading by angular , from here.
   // How ? because a component having the metadata i.e. providers.
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent implements OnInit , AfterViewInit{
 
   //FullNamesOrders = [];
   //ProductsData = [];
@@ -19,7 +20,14 @@ export class OrdersComponent implements OnInit {
     private OrderServcieInstanceParent: OrdersService) {
   }
 
+  @ViewChild('container') container;
+  @ViewChild('tempmlate') template;
+
   ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
+    //this.container.
   }
 
   CustomerName = '';

@@ -8,6 +8,7 @@ import { CustomersComponent } from './customers/customers.component';
 import { OrdersComponent } from './orders/orders.component';
 import { OrderDetailsComponent } from './orders/order-details/order-details.component';
 import { ProductsService } from './products.service';
+import { TestOrderComponent } from './test-order/test-order.component';
 
 @NgModule({
   declarations:
@@ -15,7 +16,8 @@ import { ProductsService } from './products.service';
       AppComponent,
       CustomersComponent,
       OrdersComponent,
-      OrderDetailsComponent],
+      OrderDetailsComponent,
+      TestOrderComponent],
   imports: [
     BrowserModule,
     FormsModule, ReactiveFormsModule,
