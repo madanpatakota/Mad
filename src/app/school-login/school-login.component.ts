@@ -39,7 +39,7 @@ export class SchoolLoginComponent implements OnInit, OnDestroy {
   evtSchoolLoginFormSubmit() {
     const ShoolName = this.schoolLoginForm.get('SchoolName').value;
     this.schoolService.LoggedStatus(ShoolName);
-    //this.route.navigate(['Main'], { relativeTo: this.activateRouter });
+    this.route.navigate(['Main'], { relativeTo: this.activateRouter });
   }
 
   ngOnDestroy() {
